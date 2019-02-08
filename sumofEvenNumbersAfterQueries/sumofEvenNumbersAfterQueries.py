@@ -1,4 +1,10 @@
 # https://leetcode.com/problems/sum-of-even-numbers-after-queries/
+# Success
+# Details
+# 58 / 58 test cases passed.
+# Runtime: 188 ms, faster than 15.01% of Python3 online submissions for Sum of Even Numbers After Queries.
+# Memory Usage: 16.4 MB, less than 100.00% of Python3 online submissions for Sum of Even Numbers After Queries.
+
 #
 # We have an array A of integers, and an array queries of queries.
 #
@@ -40,6 +46,8 @@ bigD = [488332, 481834, 489032, 484148, 484148, 484148, 484880, 475778, 475778, 
 
 # A = [1,2,3,4]
 # queries = [[1,0],[-3,1],[-4,0],[2,3]]
+# A = [1]
+# queries = [[4,0]]
 b = (len(queries) , len(A))[len(A) > len(queries)]
 C = []
 print b
@@ -66,7 +74,7 @@ for i in range(0, b):
 
         #------------------------------
 
-    if ((queries[i][0] % 2) == 0): #both are even
+    if ((queries[i][0] % 2) == 0) and (A[queries[i][1]] % 2 == 0): #both are even
         fsum += queries[i][0]
         A[queries[i][1]] += queries[i][0]
         # print ("Inside EE add: ", queries[i][0] ," ::to this: ", A[queries[i][1]], " ::to form this: ", (queries[i][0] + A[queries[i][1]]), " ::where fsum is: ", fsum)
@@ -83,7 +91,6 @@ for i in range(0, b):
         A[queries[i][1]] += queries[i][0]
 
     elif (((queries[i][0] % 2) == 0) and ((A[queries[i][1]] % 2) != 0)): #Query even and num odd
-        fsum += (queries[i][0] + A[queries[i][1]])
         # print ("Inside EO add: ", queries[i][0] ," ::to this: ", A[queries[i][1]], " ::to form this: ", (queries[i][0] + A[queries[i][1]]), " ::where fsum is: ", fsum)
         A[queries[i][1]] += queries[i][0]
 
@@ -94,11 +101,11 @@ for i in range(0, b):
 
     # print B
     C.append(fsum)
-    print (".", C)
-    print ("------------------------------")
-# print (set(C).difference(set(bigD)))
-if C == bigD:
-    print "Awesome"
-# print C
+    # print (".", C)
+    # print ("------------------------------")
+    # print (set(C).difference(set(bigD)))
+    # if C == bigD:
+    #     print "Awesome"
+    # print C
 end = time.time()
 print(end - start)
